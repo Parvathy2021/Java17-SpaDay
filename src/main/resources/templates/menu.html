@@ -8,15 +8,16 @@
 <body class="body">
 <h1>My Super Fancy Spa</h1>
 <div id = "clientProfile">
+    <h2>My Profile</h2>
     <p th:text = "${name}"></p>
     <p th:text = "${skintype}"></p>
     <p th:text = "${manipedi}"></p>
 </div>
 <div id = "servicesMenu">
-    <h2>Menu of services available</h2>
+    <h2>Menu of Available Services</h2>
         <div>
             <h3>Facial Treatments</h3>
-            <p>The facial treatments below are recommended by our estheticians for your given skin type.</p>
+            <p>The facial treatments below are recommended by our estheticians for your given skin type:</p>
             <table>
                 <th:block th:each="facial : ${appropriateFacials}" >
                     <tr>
@@ -24,24 +25,26 @@
                     </tr>
                 </th:block>
             </table>
-            <div th:if = "${manipedi == 'manicure'}">
+        </div>
+            <div th:if = "${manipedi.equals('manicure')} or${manipedi.equals('both')}">
                 <h3>Manicure</h3>
                 <p th:replace="Fragments :: manicureDescription"></p>
             </div>
-            <div th:if = "${manipedi == 'pedicure'}">
+            <div th:if = "${manipedi.equals('pedicure')} or${manipedi.equals('both')}">
                 <h3>Pedicure</h3>
                 <p th:replace="Fragments :: pedicureDescription"></p>
-            </div>
+
             </div>
         </div>
 <footer>
     <div>
         Ask about our New Colors for your Mani/Pedi!!
     </div>
-    <div id=" polish-collection"> </div>
-    <th:block th:each=" option :${polishChoices}">
+    <div id="polish-collection">
+    <th:block th:each=" option : ${polishChoices}">
         <div class="polish-sample" th:style="'background: ' + ${option}"></div>
     </th:block>
+    </div>
 </footer>
 </body>
 </html>
