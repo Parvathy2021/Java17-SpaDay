@@ -5,11 +5,43 @@
     <title>Spa Menu</title>
     <link href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet" />
 </head>
-<body>
+<body class="body">
 <h1>My Super Fancy Spa</h1>
 <div id = "clientProfile">
+    <p th:text = "${name}"></p>
+    <p th:text = "${skintype}"></p>
+    <p th:text = "${manipedi}"></p>
 </div>
 <div id = "servicesMenu">
-</div>
+    <h2>Menu of services available</h2>
+        <div>
+            <h3>Facial Treatments</h3>
+            <p>The facial treatments below are recommended by our estheticians for your given skin type.</p>
+            <table>
+                <th:block th:each="facial : ${appropriateFacials}" >
+                    <tr>
+                        <td th:text="${facial}"></td>
+                    </tr>
+                </th:block>
+            </table>
+            <div th:if = "${manipedi == 'manicure'}">
+                <h3>Manicure</h3>
+                <p th:replace="Fragments :: manicureDescription"></p>
+            </div>
+            <div th:if = "${manipedi == 'pedicure'}">
+                <h3>Pedicure</h3>
+                <p th:replace="Fragments :: pedicureDescription"></p>
+            </div>
+            </div>
+        </div>
+<footer>
+    <div>
+        Ask about our New Colors for your Mani/Pedi!!
+    </div>
+    <div id=" polish-collection"> </div>
+    <th:block th:each=" option :${polishChoices}">
+        <div class="polish-sample" th:style="'background: ' + ${option}"></div>
+    </th:block>
+</footer>
 </body>
 </html>
